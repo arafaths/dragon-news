@@ -1,0 +1,33 @@
+import Link from 'next/link';
+import React from 'react';
+import User from '@/assets/user.png'
+import Image from 'next/image';
+import NavLink from './navlink';
+
+const Navbar = () => {
+  return (
+    <div className="flex items-center justify-between container mx-auto mt-2 px-5">
+      <ul className="absolute left-1/2 transform -translate-x-1/2 flex gap-6 text-gray-600">
+        <li>
+          <NavLink href={'/'}>Home</NavLink>
+        </li>
+        <li>
+          <NavLink href={'/about'}>About</NavLink>
+        </li>
+        <li>
+          <NavLink href={'/career'}>Career</NavLink>
+        </li>
+      </ul>
+      <div className="flex gap-3 ml-auto items-center">
+        <Image src={User} width={30} alt="User icon" />
+        <Link href={'/login'}>
+          <button className=" bg-gray-800 text-white font-semibold rounded-none text-lg py-1 px-4">
+            LogIn
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
