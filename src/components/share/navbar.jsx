@@ -6,7 +6,7 @@ import NavLink from './navlink';
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between container mx-auto mt-2 px-5">
+    <div className="flex items-center justify-between container mx-auto mt-2 px-5 pb-2">
       <ul className="absolute left-1/2 transform -translate-x-1/2 flex gap-6 text-gray-600">
         <li>
           <NavLink href={'/'}>Home</NavLink>
@@ -20,7 +20,7 @@ const Navbar = () => {
       </ul>
       <div className="flex gap-3 ml-auto items-center">
         <Image src={User} width={30} alt="User icon" />
-        <Link href={'/login'}>
+        <Link href={'/signin'}>
           <button className=" bg-gray-800 text-white font-semibold rounded-none text-lg py-1 px-4">
             LogIn
           </button>
