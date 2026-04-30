@@ -1,4 +1,5 @@
 'use client';
+import { authClient } from '@/lib/auth-client';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -10,7 +11,22 @@ const SignupPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = data => {};
+  const onSubmit = async data => {
+    const { data: res, error } = await authClient.signUp.email({
+      name: data.name, // required
+      email: data.email, // required
+      password: data.password, // required
+      image: data.photo,
+      callbackURL: '/',
+    });
+
+    if (error) {
+      alert(error.message);
+    }
+    if (res) {
+      alert('SignUp Successful');
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-200">
       <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-md">
@@ -37,14 +53,14 @@ const SignupPage = () => {
 
           {/* Photo URL */}
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Photo URL
-            </label>
+            <label className="block text-sm font-medium mb-1">Photo URL</label>
             <input
               type="text"
-              placeholder="Enter your email address"
+              placeholder="Enter your photo URL"
               className="w-full px-4 py-2 border rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400"
-              {...register('photo', { required: 'Photo URL filed is required' })}
+              {...register('photo', {
+                required: 'Photo URL filed is required',
+              })}
             />
             {errors.photo && (
               <p className="text-red-500">{errors.photo.message}</p>
@@ -88,7 +104,7 @@ const SignupPage = () => {
             type="submit"
             className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-700 transition"
           >
-            Login
+            Register
           </button>
         </form>
       </div>
